@@ -1,23 +1,12 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
- <!--<![endif]-->
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>BabylonJSX - Native JS Events</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../vendor/babylon.2.1-alpha.debug.js"></script>
-    <script src="../babylonx.nativejsevents.js"></script>
-    <script src="../vendor/hand-1.3.8.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
     <style>
         html, body {
             overflow: hidden;
@@ -36,10 +25,6 @@
 
 </head>
 <body>
-    <!--[if lt IE 7]>
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -56,88 +41,11 @@
         </div>
     </div>
 
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-
+    <script src="../vendor/babylon.2.1-alpha.debug.js"></script>
+    <script src="../babylonx.nativejsevents.2.1-alpha.js"></script>
+    <script src="../vendor/hand-1.3.8.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-
-        $(function () {
-
-            //Add nodeAdded event to fetch all added nodes.
-            $("#renderCanvas").on("nodeAdded", function (evt) {
-                //the original details sent from babylon
-                var details = evt.originalEvent.detail
-
-                //just some jquery magic :-)
-                var newLi = $("<li></li>").addClass("list-group-item").append($("<span></span>").addClass("badge").text("0")).append($("<span></span>").text(details.originalId));
-                if (details.kind === "mesh") {
-                    //adding the events.
-                    $("#" + details.htmlId).on("mouseover", function (evt) {
-                        //pointOver will set the class active
-                        newLi.addClass("active")
-                    }).on("mouseout", function (evt) {
-                        //pointOut will remove the active class
-                        newLi.removeClass("active")
-                    }).on("click", function (evt) {
-                        //pick will increase the number in the badge
-                        var badge = newLi.find(".badge");
-                        var badgeInt = parseInt(badge.text()) + 1;
-                        badge.text("" + (badgeInt));
-                    });
-                    $("#meshes").append(newLi);
-                } else {
-                    $("#" + details.kind + "s").append(newLi);
-                }
-            });
-
-            //Now the babylon stuff!
-
-            var canvas = document.getElementById("renderCanvas");
-            var engine = new BABYLON.Engine(canvas, true);
-            var createScene = function () {
-                var scene = new BABYLON.Scene(engine);
-
-                var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
-
-                var camera = new BABYLON.ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 8, 50, BABYLON.Vector3.Zero(), scene);
-                camera.attachControl(canvas, true);
-                var light = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
-                var box = BABYLON.Mesh.CreateBox("box", 6.0, scene);
-                var sphere = BABYLON.Mesh.CreateSphere("sphere", 10.0, 10.0, scene);
-                var plan = BABYLON.Mesh.CreatePlane("plane", 10.0, scene);
-                var cylinder = BABYLON.Mesh.CreateCylinder("cylinder", 3, 3, 3, 6, 1, scene, false);
-                var torus = BABYLON.Mesh.CreateTorus("torus", 5, 1, 10, scene, false);
-                var knot = BABYLON.Mesh.CreateTorusKnot("knot", 2, 0.5, 128, 64, 2, 3, scene);
-                var lines = BABYLON.Mesh.CreateLines("lines", [
-                    new BABYLON.Vector3(-10, 0, 0),
-                    new BABYLON.Vector3(10, 0, 0),
-                    new BABYLON.Vector3(0, 0, -10),
-                    new BABYLON.Vector3(0, 0, 10)
-                ], scene);
-
-                box.position = new BABYLON.Vector3(-10, 0, 0);
-                sphere.position = new BABYLON.Vector3(0, 10, 0);
-                plan.position.z = 10;
-                cylinder.position.z = -10;
-                torus.position.x = 10;
-                knot.position.y = -10;
-
-                return scene;
-            }
-
-            var scene = createScene();
-
-            
-
-            engine.runRenderLoop(function () {
-                scene.render();
-            });
-
-            window.addEventListener("resize", function () {
-                engine.resize();
-            });
-
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
