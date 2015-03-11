@@ -34,11 +34,16 @@
     var createScene = function () {
         var scene = new BABYLON.Scene(engine);
 
+        //Register the event register handler. Should always be registered before creating nodes!
         var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
 
+        //Camera
         var camera = new BABYLON.ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 8, 50, BABYLON.Vector3.Zero(), scene);
         camera.attachControl(canvas, true);
-        var light = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0, 1, 0), scene);
+        //Setting up the light
+        var light = new BABYLON.HemisphericLight("Hemispheric", new BABYLON.Vector3(0, 1, 0), scene);
+
+        //Now start adding meshes.
         var box = BABYLON.Mesh.CreateBox("box", 6.0, scene);
         var sphere = BABYLON.Mesh.CreateSphere("sphere", 10.0, 10.0, scene);
         var plan = BABYLON.Mesh.CreatePlane("plane", 10.0, scene);
@@ -63,8 +68,6 @@
     }
 
     var scene = createScene();
-
-
 
     engine.runRenderLoop(function () {
         scene.render();
