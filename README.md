@@ -2,6 +2,19 @@
 
 This BabylonJS (2.1 and up) extension allows the user to register native javascript events to babylon meshes.
 
+##Why do I need this?
+Yes, you can actually do it yourself! This extension is no magic. It uses Babylon's ActionManager to trigger native JS events.
+
+This was created for people who work with external developers who do not want to deal with Babylon's actions. They want to use their known and beloved jQuery event registration.
+
+Using this extension it will be easier to interact with the html part of your game/application.
+
+##Demo?
+
+Can be found here - http://my-cac.com/babylon/
+
+The table on the right is populated dynamically. Hovering about meshes and clicking on them will update the meshes' table. This is all done using jQuery and bootstrap.
+
 ##Supported events:
 
 * click
