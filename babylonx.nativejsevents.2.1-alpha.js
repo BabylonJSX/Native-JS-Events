@@ -34,6 +34,16 @@ var BABYLONX;
             this._scene['onCameraRemoved'] = this.onNodeRemoved;
             this._scene['onNewLightAdded'] = this.onNodeAdded;
             this._scene['onLightRemoved'] = this.onNodeRemoved;
+            //register already-created meshes
+            this._scene.meshes.forEach(function (node, index) {
+                _this.onNodeAdded(node, index);
+            });
+            this._scene.cameras.forEach(function (node, index) {
+                _this.onNodeAdded(node, index);
+            });
+            this._scene.lights.forEach(function (node, index) {
+                _this.onNodeAdded(node, index);
+            });
         }
         EventsRegister.prototype._triggerJsEvent = function (evt, eventData, htmlId) {
             var newEvent = document.createEvent('CustomEvent');

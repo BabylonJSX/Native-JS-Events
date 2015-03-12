@@ -14,6 +14,18 @@
             this._scene['onCameraRemoved'] = this.onNodeRemoved;
             this._scene['onNewLightAdded'] = this.onNodeAdded;
             this._scene['onLightRemoved'] = this.onNodeRemoved;
+            //register already-created meshes
+            this._scene.meshes.forEach((node, index) => {
+                this.onNodeAdded(node, index);
+            });
+
+            this._scene.cameras.forEach((node, index) => {
+                this.onNodeAdded(node, index);
+            });
+
+            this._scene.lights.forEach((node, index) => {
+                this.onNodeAdded(node, index);
+            });
         }
 
         public onNodeAdded = (node: BABYLON.Node, position: number) => {
