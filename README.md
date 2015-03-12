@@ -11,7 +11,7 @@ Using this extension it will be easier to interact with the html part of your ga
 
 ##Demo?
 
-Can be found here - http://my-cac.com/babylon/
+Can be found here - http://raananweber.com/nativeJsEvents/
 
 The table on the right is populated dynamically. Hovering about meshes and clicking on them will update the meshes' table. This is all done using jQuery and bootstrap.
 
