@@ -20,8 +20,8 @@ The table on the right is populated dynamically. Hovering about meshes and click
 * Add the extension after BabylonJS's javasciprt file:
 
 ```html
-<script src="../vendor/babylon.2.1-alpha.debug.js"></script>
-<script src="../babylonx.nativejsevents.2.1-alpha.js"></script>
+<script src="babylon.2.1-alpha.debug.js"></script>
+<script src="babylonx.nativejsevents.2.1-alpha.js"></script>
 ```
 
 * initialize the event register class after creating the scene:
