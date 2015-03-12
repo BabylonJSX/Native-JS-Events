@@ -1,10 +1,20 @@
+/**
+ * BabylonJS Native JS event triggering.
+ *
+ * Created by Raanan Weber (info@raananweber.com), MIT Licensed.
+ */
 var BABYLONX;
 (function (BABYLONX) {
     var EventsRegister = (function () {
-        function EventsRegister(_scene) {
+        /**
+         * @param _scene {BABYLON.Scene} - the BabylonJS scene to be used.
+         * @param processRegistered {boolean} - should already-registered nodes be processed by the extension. defaults to true.
+         */
+        function EventsRegister(_scene, processRegistered) {
             var _this = this;
+            if (processRegistered === void 0) { processRegistered = true; }
             this._scene = _scene;
-            this.onNodeAdded = function (node, position) {
+            this.onNodeAdded = function (node, position) { 
                 _this._generateHtmlElement(node);
                 if (node instanceof BABYLON.AbstractMesh) {
                     var mesh = node;
@@ -34,16 +44,20 @@ var BABYLONX;
             this._scene['onCameraRemoved'] = this.onNodeRemoved;
             this._scene['onNewLightAdded'] = this.onNodeAdded;
             this._scene['onLightRemoved'] = this.onNodeRemoved;
-            //register already-created meshes
-            this._scene.meshes.forEach(function (node, index) {
-                _this.onNodeAdded(node, index);
-            });
-            this._scene.cameras.forEach(function (node, index) {
-                _this.onNodeAdded(node, index);
-            });
-            this._scene.lights.forEach(function (node, index) {
-                _this.onNodeAdded(node, index);
-            });
+            if (processRegistered) {
+                //register already-created meshes
+                this._scene.meshes.forEach(function (node, index) {
+                    _this.onNodeAdded(node, index);
+                });
+                //register already-created cameras
+                this._scene.cameras.forEach(function (node, index) {
+                    _this.onNodeAdded(node, index);
+                });
+                //register already-created lights
+                this._scene.lights.forEach(function (node, index) {
+                    _this.onNodeAdded(node, index);
+                });
+            }
         }
         EventsRegister.prototype._triggerJsEvent = function (evt, eventData, htmlId) {
             var newEvent = document.createEvent('CustomEvent');
