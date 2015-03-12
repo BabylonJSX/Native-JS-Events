@@ -72,7 +72,7 @@ var BABYLONX;
             var id = node['htmlId'];
             var element = document.getElementById(id);
             element.parentElement.removeChild(element);
-            this._triggerJsEvent("nodeRemoved", { kind: kind, id: id });
+            this._triggerJsEvent("nodeRemoved", { kind: kind, originalId: node.id, htmlId: id });
         };
         EventsRegister.prototype._getNodeKind = function (node) {
             if (node instanceof BABYLON.Camera)
