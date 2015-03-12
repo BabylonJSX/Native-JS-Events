@@ -87,7 +87,7 @@
             var id = node['htmlId'];
             var element = document.getElementById(id);
             element.parentElement.removeChild(element);
-            this._triggerJsEvent("nodeRemoved", { kind: kind, id: id });
+            this._triggerJsEvent("nodeRemoved", { kind: kind, originalId: node.id, htmlId: id });
         }
 
         private _getNodeKind(node: BABYLON.Node): string {
