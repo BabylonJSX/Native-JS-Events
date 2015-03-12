@@ -15,6 +15,24 @@ Can be found here - http://my-cac.com/babylon/
 
 The table on the right is populated dynamically. Hovering about meshes and clicking on them will update the meshes' table. This is all done using jQuery and bootstrap.
 
+##Usage
+
+1. Add the extension after BabylonJS's javasciprt file:
+
+```html
+<script src="../vendor/babylon.2.1-alpha.debug.js"></script>
+<script src="../babylonx.nativejsevents.2.1-alpha.js"></script>
+```
+
+2. initialize the event register class after creating the scene:
+
+```javascript
+var scene = myWonderfulSceneCreationMethod();
+var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
+```
+
+3. Register the events (documented below).
+
 ##Supported events:
 
 * click
