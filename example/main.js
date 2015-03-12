@@ -1,6 +1,16 @@
 ﻿$(function () {
 
-    //Add nodeAdded event to fetch all added nodes.
+    //vanilla JS example
+    document.getElementById("renderCanvas").addEventListener("nodeAdded", function (event) {
+        //register click, if it's a mesh:
+        if (event.detail.kind === "mesh") {
+            document.getElementById(event.detail.htmlId).onclick = function (clickActionEvent) {
+                //do something!
+            }
+        }
+    }, false);
+
+    //jQuery - Add nodeAdded event to fetch all added nodes.
     $("#renderCanvas").on("nodeAdded", function (evt) {
         //the original details sent from babylon
         var details = evt.originalEvent.detail
@@ -34,8 +44,7 @@
     var createScene = function () {
         var scene = new BABYLON.Scene(engine);
 
-        //Register the event register handler. Should always be registered before creating nodes!
-        var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
+        
 
         //Camera
         var camera = new BABYLON.ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 8, 50, BABYLON.Vector3.Zero(), scene);
@@ -68,6 +77,9 @@
     }
 
     var scene = createScene();
+
+    //Register the event register handler.
+    var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
 
     engine.runRenderLoop(function () {
         scene.render();
