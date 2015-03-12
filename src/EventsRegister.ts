@@ -1,12 +1,20 @@
-﻿module BABYLONX {
+﻿/**
+ * BabylonJS Native JS event triggering.
+ * 
+ * Created by Raanan Weber (info@raananweber.com), MIT Licensed.
+ */
+
+module BABYLONX {
 
     export class EventsRegister {
 
         private _canvasElement: HTMLCanvasElement;
 
-        public eventKinds: Array<String>;
-
-        constructor(private _scene: BABYLON.Scene) {
+        /**
+         * @param _scene {BABYLON.Scene} - the BabylonJS scene to be used.
+         * @param processRegistered {boolean} - should already-registered nodes be processed by the extension. defaults to true.
+         */
+        constructor(private _scene: BABYLON.Scene, processRegistered: boolean = true) {
             this._canvasElement = this._scene.getEngine().getRenderingCanvas();
             this._scene['onNewMeshAdded'] = this.onNodeAdded;
             this._scene['onMeshRemoved'] = this.onNodeRemoved;
@@ -14,21 +22,23 @@
             this._scene['onCameraRemoved'] = this.onNodeRemoved;
             this._scene['onNewLightAdded'] = this.onNodeAdded;
             this._scene['onLightRemoved'] = this.onNodeRemoved;
-            //register already-created meshes
-            this._scene.meshes.forEach((node, index) => {
-                this.onNodeAdded(node, index);
-            });
-
-            this._scene.cameras.forEach((node, index) => {
-                this.onNodeAdded(node, index);
-            });
-
-            this._scene.lights.forEach((node, index) => {
-                this.onNodeAdded(node, index);
-            });
+            if (processRegistered) {
+                //register already-created meshes
+                this._scene.meshes.forEach((node, index) => {
+                    this.onNodeAdded(node, index);
+                });
+                //register already-created cameras
+                this._scene.cameras.forEach((node, index) => {
+                    this.onNodeAdded(node, index);
+                });
+                //register already-created lights
+                this._scene.lights.forEach((node, index) => {
+                    this.onNodeAdded(node, index);
+                });
+            }
         }
 
-        public onNodeAdded = (node: BABYLON.Node, position: number) => {
+        private onNodeAdded = (node: BABYLON.Node, position: number) => {
             this._generateHtmlElement(node);
             if (node instanceof BABYLON.AbstractMesh) {
                 var mesh = <BABYLON.AbstractMesh> node; 
@@ -48,7 +58,7 @@
             }
         }
 
-        public onNodeRemoved = (node: BABYLON.Node) => {
+        private onNodeRemoved = (node: BABYLON.Node) => {
             this._removeHtmlElement(node);
         }
 
