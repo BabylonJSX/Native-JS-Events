@@ -1,4 +1,4 @@
-#BabylonJS Native-JS-Events
+#BabylonJS Native JS Events
 
 This BabylonJS (2.1 and up) extension allows the user to register native javascript events to babylon meshes.
 
@@ -17,21 +17,21 @@ The table on the right is populated dynamically. Hovering about meshes and click
 
 ##Usage
 
-1. Add the extension after BabylonJS's javasciprt file:
+* Add the extension after BabylonJS's javasciprt file:
 
 ```html
 <script src="../vendor/babylon.2.1-alpha.debug.js"></script>
 <script src="../babylonx.nativejsevents.2.1-alpha.js"></script>
 ```
 
-2. initialize the event register class after creating the scene:
+* initialize the event register class after creating the scene:
 
 ```javascript
 var scene = myWonderfulSceneCreationMethod();
 var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
 ```
 
-3. Register the events (documented below).
+* Register the events (documented below).
 
 ##Supported events:
 
@@ -129,13 +129,13 @@ document.getElementById("renderCanvas").addEventListener("nodeAdded", function (
 
 ### nodeRemoved
 
-Just like nodeAdded, nodeRemoved is triggered when a node is removed from the babylon scene.
+Just like nodeAdded, nodeRemoved is triggered after a node is removed from the babylon scene.
 
 The event detail element will contain:
 
 * kind : string - the kind of node that was removed (mesh, light, camera)
 * originalId : string - the original id of the babylon node
-* htmlId : the id of the html tag that was created for this node. This id can be used to register the other kinds of events.
+* htmlId : the id of the html tag that was created for this node. 
 
 ##Suggestions?
 
