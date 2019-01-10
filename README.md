@@ -1,21 +1,21 @@
-#BabylonJS Native JS Events
+# BabylonJS Native JS Events
 
 This BabylonJS (2.1 and up) extension allows the user to register native javascript events to babylon meshes.
 
-##Why do I need this?
+## Why do I need this?
 Yes, you can actually do it yourself! This extension is no magic. It uses Babylon's ActionManager to trigger native JS events.
 
 This was created for people who work with external developers who do not want to deal with Babylon's actions. They want to use their known and beloved jQuery event registration.
 
 Using this extension it will be easier to interact with the html part of your game/application.
 
-##Demo?
+## Demo?
 
 Can be found here - http://raananweber.com/nativeJsEvents/
 
 The table on the right is populated dynamically. Hovering about meshes and clicking on them will update the meshes' table. This is all done using jQuery and bootstrap.
 
-##Usage
+## Usage
 
 * Add the extension after BabylonJS's javasciprt file:
 
@@ -33,7 +33,7 @@ var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
 
 * Register the events (documented below).
 
-##Supported events:
+## Supported events:
 
 * click
 * mouseover
@@ -41,7 +41,7 @@ var nativeEventsHandler = new BABYLONX.EventsRegister(scene);
 * nodeAdded
 * nodeRemoved
 
-##How does it work?
+## How does it work?
 
 The extension adds HTML elements to the DOM with an ID that correlates to the ID given to the babylon mesh.
 
@@ -65,7 +65,7 @@ $("mesh").on("click", function(event) {
 })
 ```
 
-##The event types and event object
+## The event types and event object
 
 The event delivered to the callback is a CustomEvent. The extra information (delivered from this extension) is located at event.detail (using jQuery it would be event.originalEvent.detail).
 
@@ -77,7 +77,7 @@ Every ActionEvent will include:
 * source - the actual BabylonJS mesh object that the event was triggered on
 * pointerX / pointerY - the mouse/tap position when this event was triggered.
 
-###click
+### click
 
 The click event is triggered when a user clicks (left, right and center) or taps on a mesh. The ActionEvent delivered will also include the original javascript event that triggered this ActionEvent.
 
@@ -137,11 +137,11 @@ The event detail element will contain:
 * originalId : string - the original id of the babylon node
 * htmlId : the id of the html tag that was created for this node. 
 
-##Suggestions?
+## Suggestions?
 
 If you need something specific please contact me.
 
-##MIT License
+## MIT License
 
 Copyright (c) 2014-2015 Raanan Weber (info@raananweber.com)
 
